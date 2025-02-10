@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question and Response</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .response-box {
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+        }
+        .button-container {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hi, my name is RYAN</h1>
+        <div class="form-group">
+            <label for="question">Enter your question:</label>
+            <input type="text" id="question" name="question">
+        </div>
+        <div class="button-container">
+            <button onclick="getResponse()">Get Response</button>
+        </div>
+
+        <div id="responseBox" class="response-box" style="display: none;">
+            <strong>Response:</strong>
+            <p id="responseText"></p>
+        </div>
+    </div>
+
+    <script>
+        // Predefined responses for specific questions
+        const responses = {
+            "What is your name?": "My name is RYAN.",
+            "How are you?": "I'm doing great, thank you!",
+            "What is the weather like?": "I don't know the current weather, but I can check it for you!",
+        };
+
+        // Function to get a response based on the question
+        function getResponse() {
+            const question = document.getElementById('question').value;
+            const responseBox = document.getElementById('responseBox');
+            const responseText = document.getElementById('responseText');
+
+            if (responses[question]) {
+                responseText.textContent = responses[question];
+            } else {
+                responseText.textContent = "Sorry, I don't have an answer to that question.";
+            }
+
+            responseBox.style.display = 'block'; // Show the response box
+        }
+    </script>
+</body>
+</html>
