@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> Chat with your new AI friend </title>
+    <style>
+    #webpage {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        height: 100vh;
+    }
+    #left {
+        h1 {text-align: center;}
+    }
+    #right {
+        display: grid;
+        grid-template-rows: repeat(2,1fr);
+        border: 1px solid rgb(0, 0, 0);
+    }
+    #topRight {
+        border: 1px solid black;
+    }
+    #bottomRight {
+        border: 1px solid black;
+    }
+    
+    </style>
+</head>
+<body>
+ <div id="webpage">
+
+    <div id="left">
+        <h1> Ryan </h1>
+        <div id="main">
+            <div id="chatbox">
+                <div id="chat-messages"></div>
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+                <const chatInput = document.getElementById("chat-messages");
+                const sendButton = document.getElementById("send-button");
+
+                sendButton.addEventListener("click", sendMessage);
+                chatInput.addEventListener("keydown", (event) => {
+                <if (event.key === "Enter") {
+                sendMessage();
+  }
+});
+function sendMessage() {
+    const userMessage = chatInput.value;
+    const response = generateResponse(userMessage);
+  
+    // Add the user message to the chat box
+    displayMessage("user", userMessage);
+  
+    // Add the chatbot response to the chat box
+    displayMessage("bot", response);
+  
+    // Clear the input field
+    chatInput.value = "";
+  }
+  
+  function generateResponse(message) {
+    // Simple response logic:
+    if (message.toLowerCase().includes("hello")) {
+      return "Hello there!";
+    } else if (message.toLowerCase().includes("how are you")) {
+      return "I'm doing well, thank you!";
+    } else {
+      return "I'm not sure I understand.";
+    }
+  }
+  function displayMessage(sender, message) {
+    const chatBox = document.getElementById("chatBox");
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message", sender);
+    messageElement.textContent = message;
+    chatBox.appendChild(messageElement);
+  }
+            </div>
+          
+        </div>
+
+    <div id="right">
+        <div id="topRight">
+            hi
+        </div>
+
+         <div id="bottomRight">
+            hi
+         </div>
+</div>
+</body>
+</html>

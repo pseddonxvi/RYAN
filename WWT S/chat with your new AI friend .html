@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> Chat with your new AI friend </title>
+    <style>
+    #webpage {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        height: 100vh;
+    }
+    #left {
+        h1 {text-align: center;}
+    }
+    #right {
+        display: grid;
+        grid-template-rows: repeat(2,1fr);
+        border: 1px solid rgb(0, 0, 0);
+    }
+    #topRight {
+        border: 1px solid black;
+    }
+    #bottomRight {
+        border: 1px solid black;
+    }
+    
+    </style>
+</head>
+<body>
+ <div id="webpage">
+
+    <div id="left">
+        <h1> Ryan </h1>
+        <div id="main">
+
+            Say something:
+            <input type="text" id="userInput">
+
+            <div id="outputArea">Response: </div>
+        </div>
+        <script>
+            AI_URL = 'http://:1234/v1/chat/completions';
+              MODEL = "llama-3.2-1b-instruct";
+      
+      
+              userInput.addEventListener("change", function(){
+                  user_input = this.value;
+                  console.log("Input:", user_input);
+      
+                  payload = {
+                      "model": MODEL,
+                      "messages": [
+                          {"role": "system", "content": "Always answer in rhymes."},
+                          {"role": "user", "content": user_input},
+                      ]
+                  }
+      
+                  talk_to_AI(payload);
+      
+              })
+      
+              function talk_to_AI(payload){
+                  let xR = new XMLHttpRequest();
+                  xR.onreadystatechange = function() {
+                      console.log("status", this.status);
+      
+                      if (this.readyState == 4 && this.status == 200) {
+                          
+                          console.log("Server Response:", this.responseText);
+                          data = JSON.parse(this.responseText);
+                          console.log("data:", data);
+      
+                          text = data.choices[0]['message']['content'];
+      
+                          console.log("text:", text);
+      
+                          outputArea.innerHTML = text;
+      
+                      }
+                  }
+      
+                  xR.open("POST", AI_URL, true);
+                  xR.setRequestHeader('Content-Type', 'application/json');
+                  xR.send(JSON.stringify(payload));
+      
+                  outputArea.innerHTML = "waiting ...";
+                  
+              }
+              
+      </script>
+    </div>
+
+    <div id="right">
+        <div id="topRight">
+            hi
+        </div>
+
+         <div id="bottomRight">
+            hi
+         </div>
+</div>
+</body>
+</html>
